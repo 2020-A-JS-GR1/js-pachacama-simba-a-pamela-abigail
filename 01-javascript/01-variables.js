@@ -151,6 +151,8 @@ console.log(edadPamela);
 console.log(edadAbigail);
 
 //lista de varibales por referencia en Js
+//object
+//arreglos
 let rafael = {
     nombre: "Rafael",
 };
@@ -172,6 +174,8 @@ delete rafael.nombre;
 console.log(rafael);
 console.log(lenin);
 
+let arregloClonado = Object.assign([], [1,2,3,4,5]);
+console.log(arregloClonado);
 
 /*
 const arregloNumeros = []; //object
