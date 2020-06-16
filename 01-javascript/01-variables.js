@@ -108,13 +108,77 @@ const pamela = {
     },
     mascotas:['cachetes','pequitas','panda'],
 }; // object
+//aceder a las propiedades del objeto
 pamela.nombre;//"Pamela"
 pamela.apellido;//'Pachacama
+pamela["nombre"]; // Pamela
+console.log(pamela)
 
+//sobre escribir
+pamela.nombre="Abigail";
+console.log(pamela);
+pamela["nombre"]="Pamela";
+console.log(pamela);
+pamela.sueldo;//undefined
+console.log(pamela.sueldo);//undefined
+//agregar
+pamela.sueldo = 1.2;
+console.log(pamela.sueldo); //1.2
+pamela["gastos"]= 0.8;
+console.log(pamela.gastos);
+//eliminar
+pamela.nombre=undefined;
+console.log(pamela);
+console.log(Object.keys(pamela)); //obtener llaves
+console.log(Object.values(pamela));//obtener valores
+delete pamela.nombre;
+//console.log(pamela);
+console.log(Object.keys(pamela));
+console.log(Object.values(pamela));
+
+// variables por referencia y por valor
+//Lista de variables por valor en Js
+//number
+//string
+//boolean
+//undefined
+let edadPamela = 24;
+let edadAbigail = edadPamela;
+console.log(edadPamela);
+console.log(edadAbigail)
+edadPamela = edadPamela + 1;
+console.log(edadPamela);
+console.log(edadAbigail);
+
+//lista de varibales por referencia en Js
+let rafael = {
+    nombre: "Rafael",
+};
+/*let lenin = rafael;
+console.log(rafael);
+console.log(lenin);
+lenin.nombre="lenin"
+console.log(rafael);
+console.log(lenin);
+delete rafael.nombre;
+console.log(rafael);
+console.log(lenin);*/
+
+let lenin= Object.assign({},rafael);
+console.log(rafael);
+console.log(lenin);
+lenin.nombre = "Lenin";
+delete rafael.nombre;
+console.log(rafael);
+console.log(lenin);
+
+
+/*
 const arregloNumeros = []; //object
 
 console.log(pamela);
 console.log(arregloNumeros);
+*/
 
 
 
