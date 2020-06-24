@@ -124,3 +124,50 @@ const respuestaFilter = arreglo
     )
 console.log('respuestaFilter', respuestaFilter); //undefined
 console.log('arreglo',arreglo)
+
+
+//some -> expresion
+//devuelve booleano
+//hay alguna nota menor a nueve Si o NO
+//OR
+
+const respuestaSome= arreglo
+    .some(
+        (valorActual, indiceActual, arregloCompleto) =>{
+            return valorActual.nota <9;
+        }
+        );
+console.log('respuestaSome', respuestaSome);
+
+//every -> expresion
+//devuelve booleano
+//todas las notas  son mayor a 14 Si o NO
+//AND
+
+const respuestaEvery= arreglo
+    .every(
+        (valorActual, indiceActual, arregloCompleto) =>{
+            return valorActual.nota >14;
+        }
+    );
+console.log('respuestaEvery', respuestaEvery);
+
+//[1,2,3,4,5,6,4,3,1]
+//reduce izq -> der
+// reduceRight der -> izq
+
+const respuestaReduce=arreglo
+    .reduce(
+        (valorAcumulado,valorActual,indice,arreglo)=>{
+            return valorAcumulada +valorActual.nota;
+        },
+        500//Acumulador
+    );
+console.log('respuestaReduce', respuestaReduce);
+
+const resultadoEstudiantesMenoresNueve= arreglo
+    .map((v)=>v.nota * 1.3)//añadiendo el 30%
+    .filter((nota)=> nota<9)//busco los <9
+const totalPuntosEstudiantes =  resultadoEstudiantesMenoresNueve
+    .reduce((acumulador,actual)=> acumulador + actual, 0); //total 6,5
+const notaPromedio=totalPuntosEstudiantes/resultadoEstudiantesMenoresNueve.length;
