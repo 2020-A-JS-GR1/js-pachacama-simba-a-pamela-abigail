@@ -51,32 +51,51 @@ const arreglo = [
     }
 ];
 
-let vocales=['a','e','i','o','u','A','E','I','O','U'];
+const vocales=['a','e','i','o','u','A','E','I','O','U'];
+//'A','E','I','O','U'
 
 let sum=0;
+let contador = 0;
+let contador1 = 0;
 const respuestaMap = arreglo
     .map(
         (valorActual,indiceActual,arregloCompleto)=> {
             const nombreaux = valorActual.nombre;
 
-            for(vocales in nombreaux){
-                sum= valorActual.nota+ 1;
+            for( let x of nombreaux ){
+                //console.log('a', a);
+                for( let y  in vocales ) {
+                    // console.log('vocales', y);
+                    if( x === vocales[y]){
+                        sum= sum+ 0.1;
+                        contador= contador+1;
+                    }
+                }
             }
+            contador1=nombreaux.length - contador;
+
             const nuevoElemento = {
                 id: valorActual.id,
                 nombre:valorActual.nombre,
-                nota: sum,
+                nota: valorActual.nota+sum + (contador1*0.05),
             };
+            sum=0;
+            contador = 0;
+            contador1 = 0;
             return nuevoElemento;
+
+            //contador = 0;
+            //contador1 = 0;
         }
     );
-console.log('respuestaMap', respuestaMap); //undefined
 
-const respuestaFilter = arreglo
+
+const respuestaFilter = respuestaMap
     .filter(
         (valorActual,indiceActual,arregloCompleto)=>{
             return valorActual.nota >= 14;
         }
-    )
+    );
+console.log('respuestaMap', respuestaMap); //undefined
 console.log('respuestaFilter', respuestaFilter); //undefined
 console.log('arreglo',arreglo)
