@@ -18,44 +18,34 @@ function promesaLeer(path) {
     return miPromesa
 }
 
-function promesaEscribir(path,contenidoNuevo) {
+function promesaEscribir(path,contenidoActual, contenidoNuevo) {
     const miPromesa2 = new Promise(
         (resolve, reject) => {
-            fs.readFile(
-                path,
-                'utf-8',
-                (error, contenido) => {
-                    if (error) {
-                        reject('No es par =(', error);
-                    } else {
-                        fs.writeFile(
-                            path,contenido +'\n'+ contenidoNuevo,'utf-8',
-                            (error)=>{
-                                if(error){
-                                    reject('No es par =(', error);
-                                }
-                                resolve(contenidoNuevo);
-                            });
+            fs.writeFile(
+                path,contenidoActual +'\n'+ contenidoNuevo,'utf-8',
+                (error)=>{
+                    if(error){
+                        reject('Error leyendo archivo', error);
+                    }else{
+                        resolve(contenidoNuevo);
                     }
-                }
-            );
+
+                });
         }
-    )
+    );
     return miPromesa2
 }
 
-async function ejercicio() {
-    console.log('1');
+async function ejercicio(path, nuevoContenido) {
     try{
-        const contenidoArchivoActual = await promesaLeerArchivo();
-        await promesaEscribirArchivo();
-        const nuevoContenido = await promesaLeerArchivo();
-        console.log(nuevoContenido);
+        const contenidoArchivoActual = await promesaLeer(path);
+        console.log(contenidoArchivoActual)
+        await promesaEscribir(path,contenidoArchivoActual,nuevoContenido);
+        const nuevoContenidoLectura = await promesaLeer(path);
+        console.log('Contenido actual\n',nuevoContenidoLectura);
     }catch (error) {
         console.error(error);
     }
 
 }
-const f = async ()=>{
-
-}
+const respuestaEjercicio = ejercicio('./deber3.txt', 'Deber cumplido3');

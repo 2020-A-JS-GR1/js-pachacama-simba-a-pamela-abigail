@@ -8,7 +8,7 @@ function promesaLeer(path) {
                 'utf-8',
                 (error, contenidoLeido) => {
                     if (error) {
-                        reject('Error promesa', error);
+                        reject('Error leyendo archivo', error);
                     } else {
                         resolve(contenidoLeido);
                     }
@@ -19,51 +19,49 @@ function promesaLeer(path) {
     return miPromesa
 }
 
-promesaLeer('./06-ejemplo.txt')
-    .then(
-        (contenido)=>{
-            console.log('Contenido then', contenido);
-            promesaEscribir('./06-ejemplo.txt','Hola Mundo')
-                .then(
-                    (contenido)=>{
-                        console.log('Contenido nuevo', contenido);
-                    }
-                )
-                .catch(
-                    (error)=>{
-                        console.log('Contenido catch',error);
-                    }
-                )
-        }
-    )
-    .catch(
-        (error)=>{
-            console.log('Contenido catch',error);
-        }
-    )
+function ejercicio(path,nuevoContenido){
+    promesaLeer(path)
+        .then(
+            (contenidoActual)=>{
+               return promesaEscribir(
+                   path, contenidoActual, nuevoContenido
+               );
+            }
+        )
+        .then(
+            () => promesaLeerArchivo(path)
+        )
+        .then(
+            (nuevoContenido)=>{
+                console.log('Nuevo contenido', nuevoContenido)
+            }
+        )
+        .catch(
+            (error)=>{
+                console.error(error);
+            }
+        )
 
-function promesaEscribir(path,contenidoNuevo) {
+}
+
+
+
+function promesaEscribir(path,contenigoActual, contenidoNuevo) {
     const miPromesa2 = new Promise(
         (resolve, reject) => {
-            fs.readFile(
-                path,
-                'utf-8',
-                (error, contenido) => {
-                    if (error) {
-                        reject('No es par =(', error);
-                    } else {
-                        fs.writeFile(
-                            path,contenido +'\n'+ contenidoNuevo,'utf-8',
-                            (error)=>{
-                                if(error){
-                                    reject('No es par =(', error);
-                                }
-                                resolve(contenidoNuevo);
-                            });
+            fs.writeFile(
+                path,contenidoActual +'\n'+ contenidoNuevo,'utf-8',
+                (error)=>{
+                    if(error){
+                        reject('Error leyendo archivo', error);
+                    }else{
+                        resolve(contenidoNuevo);
                     }
-                }
-            );
+
+                });
         }
-    )
+    );
     return miPromesa2
 }
+
+ejercicio('./06-ejemplo.txt', 'Buenas mañanas');
