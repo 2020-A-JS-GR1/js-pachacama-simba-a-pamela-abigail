@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 function promesaLeer(path) {
     const miPromesa = new Promise(
         (resolve, reject) => {
@@ -8,7 +7,7 @@ function promesaLeer(path) {
                 'utf-8',
                 (error, contenidoLeido) => {
                     if (error) {
-                        reject('Error leyendo archivo', error);
+                        reject('Error promesa', error);
                     } else {
                         resolve(contenidoLeido);
                     }
@@ -19,34 +18,7 @@ function promesaLeer(path) {
     return miPromesa
 }
 
-function ejercicio(path,nuevoContenido){
-    promesaLeer(path)
-        .then(
-            (contenidoActual)=>{
-               return promesaEscribir(
-                   path, contenidoActual, nuevoContenido
-               );
-            }
-        )
-        .then(
-            () => promesaLeerArchivo(path)
-        )
-        .then(
-            (nuevoContenido)=>{
-                console.log('Nuevo contenido', nuevoContenido)
-            }
-        )
-        .catch(
-            (error)=>{
-                console.error(error);
-            }
-        )
-
-}
-
-
-
-function promesaEscribir(path,contenigoActual, contenidoNuevo) {
+function promesaEscribir(path,contenidoActual, contenidoNuevo) {
     const miPromesa2 = new Promise(
         (resolve, reject) => {
             fs.writeFile(
@@ -64,4 +36,16 @@ function promesaEscribir(path,contenigoActual, contenidoNuevo) {
     return miPromesa2
 }
 
-ejercicio('./06-ejemplo.txt', 'Buenas mañanas');
+async function ejercicio(path, nuevoContenido) {
+    try{
+        const contenidoArchivoActual = await promesaLeer(path);
+        console.log(contenidoArchivoActual)
+        await promesaEscribir(path,contenidoArchivoActual,nuevoContenido);
+        const nuevoContenidoLectura = await promesaLeer(path);
+        console.log('Contenido actual\n',nuevoContenidoLectura);
+    }catch (error) {
+        console.error(error);
+    }
+
+}
+const respuestaEjercicio = ejercicio('./deber3.txt', 'Deber cumplido3');
