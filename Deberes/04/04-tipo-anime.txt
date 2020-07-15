@@ -1,0 +1,3 @@
+01,Shojo,2,false,4,El shojo es algo bonito
+02,Shone,2,false,4,El shojo es algo bonito
+02,Shone,2,false,4,El shojo es algo bonito
