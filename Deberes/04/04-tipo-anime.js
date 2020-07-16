@@ -1,5 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+
 async function main() {
     try{
         console.log('Menu');
@@ -14,9 +15,11 @@ async function main() {
                 name: 'opcion',
                 message: 'Ingresa la opcion'
             },
-        ]);
-        console.log('Respuesta', respuesta[0]);
-        ejercicioPadre(respuesta.message);
+        ]).then(answers => {
+            console.info('Answer:', answers.opcion);
+            ejercicioPadre(answers.opcion);
+        });
+
     }catch (e) {
         console.error('error',e);
     }
@@ -44,10 +47,12 @@ function promesaLeerTipo(path) {
 }
 
 function promesaEscribirTipo(path,contenidoActual, contenidoNuevo) {
+    var contenido=[];
+    contenidoActual.push(contenidoNuevo)
     const miPromesaPadre = new Promise(
         (resolve, reject) => {
             fs.writeFile(
-                path,contenidoActual +'\n'+ contenidoNuevo,'utf-8',
+                path,JSON.stringify(contenidoActual),'utf-8',
                 (error)=>{
                     if(error){
                         reject('Error leyendo archivo', error);
@@ -92,18 +97,21 @@ async function ejercicioPadre(opcion) {
                     console.log('1. Leer Padres');
                     console.log('2. Escribir nuevo Padre');
                     console.log('3. Actualizar Padre');
-                    console.log('2. Eliminar Padre');
-                    const respuesta = await inquirer.prompt([
+                    console.log('4. Eliminar Padre');
+                    await inquirer.prompt([
                         {
                             type: 'input',
                             name: 'opcion',
                             message: 'Ingresa la opcion'
                         },
-                    ]);
-                    eleccion(respuesta.message,'./04-tipo-anime.json');
+                    ]).then(answers => {
+                        console.info('Answer:', answers.opcion);
+                        eleccion(answers.opcion,'./04-tipo-anime.json');
+                    });
                 } catch (e) {
                     console.error('error',e);
                 }
+                break;
             case '2':
                 try{
                     eleccion('1','./04-tipo-anime.json');
@@ -114,15 +122,17 @@ async function ejercicioPadre(opcion) {
                     console.log('1. Leer Hijos de: ');
                     console.log('2. Escribir nuevo hijo de:');
                     console.log('3. Actualizar hijo de: ');
-                    console.log('2. Eliminar hijo de: ');
+                    console.log('4. Eliminar hijo de: ');
                     const respuesta = await inquirer.prompt([
                         {
                             type: 'input',
                             name: 'opcion',
                             message: 'Ingresa la opcion'
                         },
-                    ]);
-                    eleccion(respuesta);
+                    ]).then(answers => {
+                        console.info('Answer:', answers.opcion);
+                        eleccion(answers.opcion,path);
+                    });
                 } catch (e) {
                     console.error('error',e);
                 }
@@ -137,21 +147,14 @@ async function ejercicioPadre(opcion) {
 }
 //ejercicioPadre('./04-tipo-anime.txt', ['02','Shone',2,false,4,'El shojo es algo bonito']);
 
-var nuevoContenido = [{
-    id: "01",
-    nombre: "Shojo",
-    categoria: 2,
-    nuevos: false,
-    rating: 4,
-    descripcion: "El shojo es algo bonito"
-}];
 
-async function eleccion(opcion) {
+async function eleccion(opcion, path) {
     try{
         switch (opcion) {
             case '1':
                 const contenidoArchivoActual = await promesaLeerTipo(path);
                 console.log('Inicio',contenidoArchivoActual)
+                break;
             case '2':
                 try{
                 const respuesta = await inquirer.prompt([
@@ -182,21 +185,24 @@ async function eleccion(opcion) {
                     }
 
                 ]);
-                    await promesaEscribirTipo(path,contenidoArchivoActual,respuesta);
+                    const contenidoArchivoActual = await promesaLeerTipo(path);
+                    const padres= JSON.parse(contenidoArchivoActual);
+                    //console.log(padres);
+                    await promesaEscribirTipo(path,padres,respuesta);
                 } catch (e) {
                     console.error('error',e);
                 }
-
+                break
             case '3':
 
             case '4':
             default:
-                console.log('Lo lamentamos, no existe esta opcion ' + expr + '.');
+                console.log('Lo lamentamos, no existe esta opcion ' + opcion + '.');
         }
     }catch (error) {
         console.error(error);
     }
-
+main()
 }
 /*var promesa = promesaLeerTipo('./04-tipo-anime.json')
     .then(
