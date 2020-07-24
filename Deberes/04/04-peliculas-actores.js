@@ -189,7 +189,7 @@ async function ejercicioPadre(opcion) {
                         },
                     ]).then(answers => {
                         console.info('Answer:', answers.opcion);
-                        eleccion(answers.opcion,'./04-tipo-anime.json');
+                        eleccion(answers.opcion,'./04-padre-pelicula.json');
                     });
                 } catch (e) {
                     console.error('error',e);
