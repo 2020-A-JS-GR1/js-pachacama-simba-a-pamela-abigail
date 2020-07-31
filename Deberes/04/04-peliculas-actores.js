@@ -239,7 +239,9 @@ async function eleccion(opcion, path) {
         switch (opcion) {
             case '1':
                 const contenidoArchivoActual = await promesaLeerTipo(path);
-                console.log('Inicio',contenidoArchivoActual)
+                //console.log('Inicio',contenidoArchivoActual)
+                const padres= JSON.parse(contenidoArchivoActual);
+                console.log(padres);
                 break;
             case '2':
                 try{
@@ -288,7 +290,7 @@ async function eleccion(opcion, path) {
                         {
                             type: 'input',
                             name: 'opcion',
-                            message: 'Engrese el número del padre'
+                            message: 'Ingrese el número del padre'
                         },{
                             type: 'input',
                             name: 'variable',
@@ -343,7 +345,9 @@ async function eleccionHijo(opcion,padre, path) {
         switch (opcion) {
             case '1':
                 const contenidoArchivoActual = await promesaLeerTipo(path);
-                console.log('Inicio',contenidoArchivoActual)
+                //console.log('Inicio',contenidoArchivoActual);
+                const padres= JSON.parse(contenidoArchivoActual);
+                console.log(padres);
                 break;
             case '2':
                 try{
