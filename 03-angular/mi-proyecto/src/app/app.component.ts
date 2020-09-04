@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {UsuarioService} from "./servicios/htttp/usuario.service";
 
 @Component({
   selector: 'aplicacion-nueva',
@@ -8,9 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'mi-proyecto';
 
-  mensajeConsola(objeto:boolean){
-    console.log('Llego el evento', objeto);
-  }
+
 
   arregloPeliculas=[
     {
@@ -33,4 +32,22 @@ export class AppComponent {
     }
 ]
   arregloNumeros=[1,2,3]
+  constructor(
+    private readonly _usuarioService: UsuarioService
+  ) {
+  }
+  mensajeConsola(objeto:boolean){
+    console.log('Llego el evento', objeto);
+    const observableTraerTodos = this._usuarioService.traerTodos();
+    observableTraerTodos
+      .subscribe(
+        (data)=>{ // THEN TRY
+          console.log(data);
+        },
+        (error)=>{ // CATCH
+          console.log(error);
+        }
+      );
+  }
+
 }
