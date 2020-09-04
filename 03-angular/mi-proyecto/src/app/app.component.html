@@ -1,6 +1,27 @@
 <h1> Lista de peliculas </h1>
-<app-carta-pelicula></app-carta-pelicula>
+<!--Directivas -NGFOR-->
+<p *ngFor="let numero of arregloNumeros">
+  {{numero}}
+</p>
 
+<div *ngFor="let pelicula of arregloPeliculas">
+<app-carta-pelicula
+  [urlImagen]="pelicula.url"
+  [descripcion]="pelicula.descripcion"
+  [nombreBoton]="pelicula.nombrePelicula"
+  (eventoDioclicBoton)="mensajeConsola($event)"
+  (eventoDioclicImagen)="mensajeConsola($event)">>
+</app-carta-pelicula>
+</div>
+<!--
+<br>
+
+<app-carta-pelicula
+  urlImagen="https://i.blogs.es/fa749e/aladdin-2019/450_1000.jpeg"
+  descripcion="Descripcion 2"
+  nombreBoton="Like 2">
+</app-carta-pelicula>
+-->
 
 <!--
 <h1>Titulo1</h1>

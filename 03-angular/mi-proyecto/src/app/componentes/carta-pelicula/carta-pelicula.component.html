@@ -1,11 +1,12 @@
-<p>carta-pelicula works!</p>
-<img [src]="urlEjemploImagen" alt="">
-
+<!--img [src]="urlEjemploImagen" alt=""-->
+<img [src]="urlImagen"
+     alt=""
+     (click)="ejecutarEventoDioClicImagen()">
 <a [href]="linkTextoEjemplo">
-  <p>{{textoEjemplo}}</p>
+  <p>{{descripcion}}</p>
 </a>
   <button
-  (click)="ejemploFuncion()"
+  (click)="ejecutarEventoDioClic()"
   (blur)="eventoOnBlur()">
-    {{textoEjemplo}}
+    {{nombreBoton}}
   </button>
