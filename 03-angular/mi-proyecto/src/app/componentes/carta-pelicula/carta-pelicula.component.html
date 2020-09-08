@@ -1,0 +1,12 @@
+<!--img [src]="urlEjemploImagen" alt=""-->
+<img [src]="urlImagen"
+     alt=""
+     (click)="ejecutarEventoDioClicImagen()">
+<a [href]="linkTextoEjemplo">
+  <p>{{descripcion}}</p>
+</a>
+  <button
+  (click)="ejecutarEventoDioClic()"
+  (blur)="eventoOnBlur()">
+    {{nombreBoton}}
+  </button>
