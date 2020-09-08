@@ -13,4 +13,12 @@ export class UsuarioService {
   return this._httpClient.get(this.url+'/Usuario')
   }
 
+  //Post /Usuario
+  crear(usuario){
+    return this._httpClient.post(
+      this.url + '/Usuario',
+      usuario
+    )
+  }
+
 }

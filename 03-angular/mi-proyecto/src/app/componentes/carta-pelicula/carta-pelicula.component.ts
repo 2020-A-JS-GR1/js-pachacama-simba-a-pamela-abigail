@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-carta-pelicula',
   templateUrl: './carta-pelicula.component.html',
   styleUrls: ['./carta-pelicula.component.css']
 })
-export class CartaPeliculaComponent implements OnInit {
+export class CartaPeliculaComponent implements OnInit, OnDestroy {
 
   @Input()
   urlImagen: string;
@@ -26,13 +26,21 @@ export class CartaPeliculaComponent implements OnInit {
   urlEjemploImagen='https://es.web.img3.acsta.net/pictures/18/03/16/15/33/3988420.jpg';
   linkTextoEjemplo='https://www.google.com.ec/';
 
-  constructor() { }
+  constructor() {
+    console.log('Constructor');
+  }
 
   ngOnInit(): void {
+    console.log('Init')
   }
   ejemploFuncion(){
     alert('Hola!');
   }
+
+  ngOnDestroy():void{
+    console.log('Destroy')
+  }
+
   eventoOnBlur(){
     console.log('Blur')
   }
@@ -42,4 +50,5 @@ export class CartaPeliculaComponent implements OnInit {
   ejecutarEventoDioClicImagen(){
     this.eventoDioclicImagen.emit(true)
   }
+
 }

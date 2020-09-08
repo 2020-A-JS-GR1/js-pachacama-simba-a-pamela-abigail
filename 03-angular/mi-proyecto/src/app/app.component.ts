@@ -8,7 +8,7 @@ import {UsuarioService} from "./servicios/htttp/usuario.service";
 })
 export class AppComponent {
   title = 'mi-proyecto';
-
+  habilitado=true;
 
 
   arregloPeliculas=[
@@ -31,23 +31,53 @@ export class AppComponent {
       nombrePelicula:'Jumanji'
     }
 ]
+
+  arregloUsuarios=[];
+  arregloObservable=[];
   arregloNumeros=[1,2,3]
   constructor(
     private readonly _usuarioService: UsuarioService
   ) {
   }
+
+  ngOnInit(){
+    this.mensajeConsola(true);
+  }
   mensajeConsola(objeto:boolean){
     console.log('Llego el evento', objeto);
     const observableTraerTodos = this._usuarioService.traerTodos();
-    observableTraerTodos
+    const  suscripcion = observableTraerTodos
       .subscribe(
         (data)=>{ // THEN TRY
+          this.arregloUsuarios = data as any[];
           console.log(data);
         },
         (error)=>{ // CATCH
           console.log(error);
         }
       );
+    //this.arregloObservable.push(suscripcion);
+    //suscripcion.unsubscribe();
+  }
+
+  crearUsuario(){
+    const usuarioNuevo={
+      cedula:'123456789155',
+      nombre:'Naruto',
+      apellido: 'Uzumaki'
+    }
+    const obsCrearUsuario = this._usuarioService
+      .crear(usuarioNuevo);
+    obsCrearUsuario
+      .subscribe(
+        (datos:Object)=>{
+          console.log('Nuevo Usuario', datos)
+          this.mensajeConsola(true);
+        },
+        (error) =>{
+          console.log('Error', error);
+        }
+      )
   }
 
 }
