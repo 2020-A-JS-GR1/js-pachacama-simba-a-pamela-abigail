@@ -11,5 +11,8 @@ export class FormularioUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  crearUsuario(formulario){
+    console.log(formulario)
+  }
 
 }

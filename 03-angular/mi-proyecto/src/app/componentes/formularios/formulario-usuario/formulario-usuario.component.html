@@ -1,1 +1,43 @@
-<p>formulario-usuario works!</p>
+<form #formularioUsuario="ngForm"
+      (ngSubmit)="crearUsuario(formularioUsuario)"
+      >
+  <div>
+    <label for="nombreId">Nombre</label>
+    <input
+      id="nombreId"
+      type="text"
+      name="nombre"
+      required
+    >
+  </div>
+  <div>
+    <label for="cedulaId">Cedula</label>
+    <input id="cedulaId"
+           type="text"
+           name="cedula"
+           required
+    >
+  </div>
+  <div>
+    <label for="estadoCivilId">Estado Civil </label>
+    <select name="estadoCivil" id="estadoCivilId">
+      <option value="Soltero"> E.C. Soltero</option>
+      <option value="Casado"> E.C. Casado</option>
+      <option value="Divorciado"> E.C. Divorciado</option>
+      <option value="Viudo"> E.C. Viudo</option>
+      <option value="Unión libre"> E.C. Unión libre</option>
+    </select>
+  </div>
+  <button type="button">
+    Boton
+  </button>
+  <button type="submit">
+    Submit
+  </button>
+  <button type="reset">
+    Reset
+  </button>
+  <button>
+    Defecto
+  </button>
+</form>

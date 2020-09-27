@@ -16,6 +16,7 @@ import { RutaEditarUsuarioComponent } from './rutas/ruta-editar-usuario/ruta-edi
 import { FormularioUsuarioComponent } from './componentes/formularios/formulario-usuario/formulario-usuario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [//componentes
@@ -33,9 +34,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [//modulo
     BrowserModule,//importa el ngfor y el ngif
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule, //importa el HttpClient
+    FormsModule, // permite funcionalidad de los formularios template
     BrowserAnimationsModule,
-    NgbModule,//importa el HttpClient
+    NgbModule,
   ],
   providers: [//servicios
     UsuarioService
