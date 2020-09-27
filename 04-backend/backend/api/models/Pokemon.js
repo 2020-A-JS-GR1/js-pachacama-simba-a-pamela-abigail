@@ -21,7 +21,7 @@ module.exports = {
                   //false //opcional 0-N por defecto
     },
     //relaciones
-    //usuario-Pokemon
+    //Pokemon-batall
     batallas:{//uno a muchos(nombre en plural)
       collection:'Batalla',//modelo a relacionarse
       via: 'pokemon' //Nombre atributo fk en el modelo relacional

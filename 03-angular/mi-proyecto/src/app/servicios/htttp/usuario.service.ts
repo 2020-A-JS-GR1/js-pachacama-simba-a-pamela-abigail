@@ -12,6 +12,9 @@ export class UsuarioService {
   traerTodos(){
   return this._httpClient.get(this.url+'/Usuario')
   }
+  obtenerUnoPorId(idUsuario: number){
+    return this._httpClient.get(this.url+'/Usuario/'+idUsuario);
+  }
 
   //Post /Usuario
   crear(usuario){
@@ -19,6 +22,10 @@ export class UsuarioService {
       this.url + '/Usuario',
       usuario
     )
+  }
+  eliminar(idUsuario:number){
+    return this._httpClient.delete( this.url + '/Usuario/' + idUsuario);
+
   }
 
 }

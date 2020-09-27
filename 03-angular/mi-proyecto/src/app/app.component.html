@@ -22,9 +22,9 @@
 <button (click)="crearUsuario()">Crear Usuario</button>
 -->
 
-<div *ngFor="let usuario of arregloUsuarios">
+<!--<div *ngFor="let usuario of arregloUsuarios">
   {{usuario.nombre}}
-</div>
+</div>-->
 <ul>
   <li>
     <a [routerLink]="['inicio']">
@@ -34,6 +34,11 @@
   <li>
     <a [routerLink]="['login']">
       Ir Login
+    </a>
+  </li>
+  <li>
+    <a [routerLink]="['usuario']">
+      Usuarios
     </a>
   </li>
 </ul>
