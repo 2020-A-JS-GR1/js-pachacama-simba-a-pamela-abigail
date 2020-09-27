@@ -9,8 +9,8 @@ export class UsuarioService {
   ) {
   }
 
-  traerTodos(){
-  return this._httpClient.get(this.url+'/Usuario')
+  traerTodos(consulta?: string){
+  return this._httpClient.get(this.url+'/Usuario?'+ consulta)
   }
   obtenerUnoPorId(idUsuario: number){
     return this._httpClient.get(this.url+'/Usuario/'+idUsuario);
@@ -20,6 +20,13 @@ export class UsuarioService {
   crear(usuario){
     return this._httpClient.post(
       this.url + '/Usuario',
+      usuario
+    )
+  }
+
+  editar(usuario, id){
+    return this._httpClient.put(
+      this.url + '/Usuario/'+ id,
       usuario
     )
   }

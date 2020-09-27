@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class RutaListaUsuarioComponent implements OnInit {
 
   arregloUsuarios = [];
+  busquedaModelo='';
 
   constructor( //inyecta dependencias
     private readonly _usuarioService: UsuarioService,
@@ -42,17 +43,37 @@ export class RutaListaUsuarioComponent implements OnInit {
       )
   }
 
+  filtrarArreglo(){
+    const consulta = {
+     or: [
+       {
+         nombre:{
+           contains: this.busquedaModelo
+         }
+       },
+       {
+         cedula:{
+           contains: this.busquedaModelo
+         }
+       }
+     ]
+    }
+    const consultaString = 'where=' + JSON.stringify(consulta);
+
+    const onservableTraerTodos = this._usuarioService.traerTodos(this.busquedaModelo != '' ? consultaString: '');
+    onservableTraerTodos
+      .subscribe(
+        (usuarios: any[])=>{
+          this.arregloUsuarios = usuarios;
+        },
+        (error)=>{
+          console.error('Error',error);
+        }
+      )
+  }
+
   ngOnInit(): void {
-  const onservableTraerTodos = this._usuarioService.traerTodos();
-  onservableTraerTodos
-    .subscribe(
-      (usuarios: any[])=>{
-        this.arregloUsuarios = usuarios;
-      },
-      (error)=>{
-        console.error('Error',error);
-      }
-    )
+    this.filtrarArreglo();
   }
 
 }

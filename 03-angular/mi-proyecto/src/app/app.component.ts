@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {UsuarioService} from "./servicios/htttp/usuario.service";
+import {AuthService} from "./servicios/auth/auth.service";
 
 @Component({
   selector: 'aplicacion-nueva',
@@ -36,7 +37,8 @@ export class AppComponent {
   arregloObservable=[];
   arregloNumeros=[1,2,3]
   constructor(
-    private readonly _usuarioService: UsuarioService
+    private readonly _usuarioService: UsuarioService,
+    public readonly _authService: AuthService
   ) {
   }
 

@@ -17,6 +17,10 @@ import { FormularioUsuarioComponent } from './componentes/formularios/formulario
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
+import {AuthService} from "./servicios/auth/auth.service";
+import {EstaLogeadoGuard} from "./servicios/guards/esta-logeado.guard";
+import {EsSupervisorGuard} from "./servicios/guards/es-supervisor.guard";
+import {EsAdministradorGuard} from "./servicios/guards/es-administrador.guard";
 
 @NgModule({
   declarations: [//componentes
@@ -40,7 +44,11 @@ import {FormsModule} from "@angular/forms";
     NgbModule,
   ],
   providers: [//servicios
-    UsuarioService
+    UsuarioService,
+    AuthService,
+    EstaLogeadoGuard,
+    EsSupervisorGuard,
+    EsAdministradorGuard
   ],
   bootstrap: [AppComponent]
 })
