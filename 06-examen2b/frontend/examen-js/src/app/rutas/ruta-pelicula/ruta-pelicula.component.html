@@ -1,0 +1,12 @@
+
+<table>
+
+  <td >
+    <a class="boton" [routerLink]="['/pelicula', 'crear']" *ngIf="_peliculaService.espelicula && !_actorService.esactor">
+      Crear Pelicula
+    </a>
+  </td>
+</table>
+<router-outlet>
+
+</router-outlet>

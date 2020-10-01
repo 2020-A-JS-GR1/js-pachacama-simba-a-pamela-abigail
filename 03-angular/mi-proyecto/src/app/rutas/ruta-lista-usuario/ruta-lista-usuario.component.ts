@@ -60,7 +60,8 @@ export class RutaListaUsuarioComponent implements OnInit {
     }
     const consultaString = 'where=' + JSON.stringify(consulta);
 
-    const onservableTraerTodos = this._usuarioService.traerTodos(this.busquedaModelo != '' ? consultaString: '');
+    const onservableTraerTodos = this._usuarioService.traerTodos(
+      this.busquedaModelo != '' ? consultaString: '');
     onservableTraerTodos
       .subscribe(
         (usuarios: any[])=>{

@@ -1,0 +1,100 @@
+<form #formularioCurso="ngForm"
+      (ngSubmit)="crearUsuario(formularioCurso)"
+>
+  <div>
+    <label for="nombreId">Nombre Pelicula</label>
+    <input
+      id="nombreId"
+      type="text"
+      name="nombre"
+      [(ngModel)]="nombreModelo"
+      required
+      minlength="5"
+      maxlength="25"
+      #nombreCampo="ngModel"
+    >
+    <div *ngIf="nombreCampo.touched&& nombreCampo.errors">
+      <p class="error" *ngIf="nombreCampo.errors.required">Error:Campo requerrido</p>
+      <p class="error" *ngIf="nombreCampo.errors.minlength">Error:La longitud minima es de 5 caracteres</p>
+      <p class="error" *ngIf="nombreCampo.errors.maxlength">Error:La longitud maxima es de 25 caracteres</p>
+    </div>
+  </div>
+
+  <div >
+    <label for="categoriaId">Categoria </label>
+    <select id="categoriaId"
+            name="categoria"
+            [(ngModel)]="categoriaModelo"
+            required
+            #calificacionCampo="ngModel"
+    >
+      <option   value="A"> A para todo publico</option>
+      <option   value="B"> B bajo la supervicion de un Adulto</option>
+      <option   value="C"> C solo para adultos</option>
+    </select>
+    <div *ngIf="calificacionCampo.touched&& calificacionCampo.errors">
+      <p class="error" *ngIf="calificacionCampo.errors.required">Error:Campo requerrido</p>
+    </div>
+  </div>
+
+  <div >
+    <label for="nuevasId">Nueva Secuela</label>
+    <select id="nuevasId"
+            name="nuevas"
+            [(ngModel)]="nuevasModelo"
+            required
+            #nuevasCampo="ngModel"
+    >
+      <option   value="true"> Si</option>
+      <option   value="false"> No</option>
+    </select>
+    <div *ngIf="nuevasCampo.touched&& nuevasCampo.errors">
+      <p class="error" *ngIf="nuevasCampo.errors.required">Error:Campo requerrido</p>
+    </div>
+  </div>
+  <div>
+    <label for="ratingId">Calificacion</label>
+    <input
+      id="ratingId"
+      type="number"
+      required
+      name="rating"
+      [(ngModel)]="ratingModelo"
+      pattern="[0-5]"
+      #ratingCampo="ngModel"
+    >
+    <div *ngIf="ratingCampo.touched&& ratingCampo.errors">
+      <p class="error" *ngIf="ratingCampo.errors.required">Error:Campo requerrido</p>
+      <p class="error" *ngIf="ratingCampo.errors.type">Error:Solo se aceptan numeros</p>
+      <p class="error" *ngIf="ratingCampo.errors.pattern">Error:Solo se aceptan numeros del 0 al 5</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="descripcionId">Descripcion</label>
+    <input
+      id="descripcionId"
+      type="text"
+      name="descripcion"
+      required
+      [(ngModel)]="descripcionModelo"
+      minlength="5"
+      maxlength="25"
+      #odescripcionCampo="ngModel"
+    >
+    <div *ngIf="odescripcionCampo.touched&& odescripcionCampo.errors">
+      <p class="error" *ngIf="odescripcionCampo.errors.required">Error:Campo requerrido</p>
+      <p class="error" *ngIf="odescripcionCampo.errors.minlength">Error:La longitud minima es de 5 caracteres</p>
+      <p class="error" *ngIf="odescripcionCampo.errors.maxlength">Error:La longitud maxima es de 25 caracteres</p>
+    </div>
+  </div>
+
+
+  <button class="boton" type="submit" [disabled]="!formularioCurso.form.valid">
+    Editar
+  </button>
+  <button class="boton" (click)="irAlista()">
+    Cancelar
+  </button>
+
+</form>

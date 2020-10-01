@@ -1,0 +1,38 @@
+<div>
+  <h4>Lista de Peliculas</h4>
+  <label for="busquedaId">Busqueda</label>
+  <input id="busquedaId" name="busqueda" type="text" [(ngModel)]="busquedaModelo">
+  <button class="boton" (click)="filtrarArreglo()">Buscar</button>
+
+  <table>
+    <tr>
+      <th> ID</th>
+      <th> Nombre Pelicula</th>
+      <th> Categoria</th>
+      <th> Nuevas Secuelas</th>
+      <th> Calificacion</th>
+      <th> Descripcion</th>
+      <th> Acciones</th>
+    </tr>
+    <tr *ngFor="let usuario of arregloPeliculas">
+      <td> {{usuario.id}}</td>
+      <td> {{usuario.nombre}}</td>
+      <td> {{usuario.categoria}}</td>
+      <td> {{usuario.nuevas}}</td>
+      <td> {{usuario.rating}}</td>
+      <td> {{usuario.descripcion}}</td>
+      <td>
+        <button class="boton" (click)="irAEditarPelicula(usuario.id)">
+          Editar
+        </button>
+        <button class="boton" (click)="irAListaActores(usuario.id)">
+          Actores
+        </button>
+        <button class="boton" (click)="eliminarPelicula(usuario.id)">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+  </table>
+
+</div>

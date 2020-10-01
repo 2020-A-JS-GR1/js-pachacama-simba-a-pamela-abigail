@@ -1,0 +1,14 @@
+
+<div *ngIf="mostrarFormulario">
+
+  <app-formulario-pelicula
+    [nombreInput]="nota.nombre"
+    [categoriaInput]="nota.categoria"
+    [nuevasInput]="nota.nuevas"
+    [ratingInput]="nota.rating"
+    [descripcionInput]="nota.descripcion"
+    (informacionValidada)="editarNotas($event)"
+  >
+
+  </app-formulario-pelicula>
+</div>

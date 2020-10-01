@@ -1,0 +1,94 @@
+<form #formularioCurso="ngForm"
+      (ngSubmit)="crearUsuario(formularioCurso)"
+>
+  <div>
+    <label for="nombreacId">Nombre Actor</label>
+    <input
+      id="nombreacId"
+      type="text"
+      name="nombreactor"
+      [(ngModel)]="nombreacModelo"
+      required
+      minlength="5"
+      maxlength="25"
+      #nombreacCampo="ngModel"
+    >
+    <div *ngIf="nombreacCampo.touched&& nombreacCampo.errors">
+      <p class="error" *ngIf="nombreacCampo.errors.required">Error:Campo requerrido</p>
+      <p class="error" *ngIf="nombreacCampo.errors.minlength">Error:La longitud minima es de 5 caracteres</p>
+      <p class="error" *ngIf="nombreacCampo.errors.maxlength">Error:La longitud maxima es de 25 caracteres</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="edadId">Edad</label>
+    <input
+      id="edadId"
+      type="number"
+      name="edad"
+      required
+      [(ngModel)]="edadModelo"
+      #edadCampo="ngModel"
+    >
+    <div *ngIf="edadCampo.touched&& edadCampo.errors">
+      <p class="error" *ngIf="edadCampo.errors.required">Error:Campo requerrido</p>
+      <p class="error" *ngIf="edadCampo.errors.type">Error:Solo se aceptan numeros</p>
+    </div>
+  </div>
+  <div >
+    <label for="casadoId">Casado/a</label>
+    <select id="casadoId"
+            name="casado"
+            [(ngModel)]="casadoModelo"
+            required
+            #nuevasCampo="ngModel"
+    >
+      <option   value="true"> Si</option>
+      <option   value="false"> No</option>
+    </select>
+    <div *ngIf="nuevasCampo.touched&& nuevasCampo.errors">
+      <p class="error" *ngIf="nuevasCampo.errors.required">Error:Campo requerrido</p>
+    </div>
+  </div>
+  <div>
+    <label for="oscarId">Oscars</label>
+    <input
+      id="oscarId"
+      type="number"
+      name="oscar"
+      pattern="[0-9]"
+      [(ngModel)]="oscarModelo"
+      #oscarCampo="ngModel"
+    >
+    <div *ngIf="oscarCampo.touched&& oscarCampo.errors">
+      <p class="error" *ngIf="oscarCampo.errors.type">Error:Solo se aceptan numeros</p>
+      <p class="error" *ngIf="oscarCampo.errors.pattern">Error:Solo se aceptan numeros del 0 al 9</p>
+    </div>
+  </div>
+
+  <div>
+    <label for="descripcionId">Descripcion</label>
+    <input
+      id="descripcionId"
+      type="text"
+      name="descripcion"
+      [(ngModel)]="descripcionModelo"
+      minlength="5"
+      maxlength="25"
+      #odescripcionCampo="ngModel"
+    >
+    <div *ngIf="odescripcionCampo.touched&& odescripcionCampo.errors">
+      <p class="error" *ngIf="odescripcionCampo.errors.minlength">Error:La longitud minima es de 5 caracteres</p>
+      <p class="error" *ngIf="odescripcionCampo.errors.maxlength">Error:La longitud maxima es de 25 caracteres</p>
+    </div>
+  </div>
+
+
+  <button class="boton" type="submit" [disabled]="!formularioCurso.form.valid">
+    Editar
+  </button>
+  <button class="boton" (click)="irAlista()">
+    Cancelar
+  </button>
+
+</form>
